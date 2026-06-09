@@ -6,184 +6,215 @@ Transaksi
 
 {% block content %}
 
-<div class="card card-shadow">
+<div class="card shadow border-0">
 
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
 
-        <div class="d-flex gap-2">
+        <h4 class="mb-0">
+            <i class="bi bi-cash-stack"></i>
+            Daftar Transaksi
+        </h4>
 
-    <a href="/transactions/export"
-       class="btn btn-success">
-        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-       📊 Export Excel
+        <a href="/transactions/export"
+           class="btn btn-success">
 
-    </a>
-
-</div>
-
-        <a
-            href="/transactions/create"
-            class="btn btn-success position-fixed"
-            style="
-            right:30px;
-            bottom:30px;
-            width:60px;
-            height:60px;
-            border-radius:50%;
-            font-size:24px;
-            ">
-
-            <i class="bi bi-plus-lg"></i>
-            +
+            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+            Export Excel
 
         </a>
 
     </div>
 
-    <form
-    action="/transactions"
-    method="GET"
-    class="row mb-3">
-
-    <div class="col-md-4">
-
-        <select
-            name="person_id"
-            class="form-select">
-
-            <option value="">
-                Semua Orang
-            </option>
-
-            {% for person in people %}
-
-            <option
-                value="{{ person[0] }}"
-                {% if selected_person == person[0]|string %}
-                selected
-                {% endif %}
-            >
-
-                {{ person[1] }}
-
-            </option>
-
-            {% endfor %}
-
-        </select>
-
-    </div>
-
-    <div class="col-md-2">
-
-        <button
-            type="submit"
-            class="btn btn-primary">
-
-            Filter
-
-        </button>
-
-    </div>
-
-</form>
-
     <div class="card-body">
 
-        <table class="table table-hover">
+        <!-- FILTER -->
 
-            <thead>
+        <form
+            action="/transactions"
+            method="GET"
+            class="row g-3 mb-4">
 
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Tanggal</th>
-                    <th>Jenis</th>
-                    <th>Kategori</th>
-                    <th>Nominal</th>
-                    <th>Keterangan</th>
-                    <th>Aksi</th>
-                </tr>
+            <div class="col-md-9">
 
-            </thead>
+                <select
+                    name="person_id"
+                    class="form-select">
 
-            <tbody>
+                    <option value="">
+                        Semua Orang
+                    </option>
 
-            {% for trx in transactions %}
+                    {% for person in people %}
 
-            <tr>
+                    <option
+                        value="{{ person[0] }}"
+                        {% if selected_person == person[0]|string %}
+                        selected
+                        {% endif %}>
 
-                <td>{{ trx[0] }}</td>
+                        {{ person[1] }}
 
-                <td>{{ trx[1] }}</td>
+                    </option>
 
-                <td>{{ trx[2] }}</td>
+                    {% endfor %}
 
-                <td>
+                </select>
 
-                    {% if trx[3] == 'masuk' %}
+            </div>
 
-                    <span class="badge bg-success">
-                        <i class="bi bi-arrow-up-right"></i>
-                        Masuk
-                    </span>
+            <div class="col-md-3">
 
-                    {% else %}
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
 
-                    <span class="badge bg-danger">
-                        <i class="bi bi-arrow-down-left"></i>
-                        Keluar
-                    </span>
+                    <i class="bi bi-funnel-fill"></i>
+                    Filter
 
-                    {% endif %}
+                </button>
 
-                </td>
+            </div>
 
-                <td>{{ trx[4] }}</td>
+        </form>
 
-                <td>
+        <!-- TABLE -->
 
-                    <strong>
+        <div class="table-responsive">
 
-                        {{ trx[5] | rupiah }}
+            <table class="table table-hover align-middle">
 
-                    </strong>
+                <thead class="table-light">
 
-                </td>
+                    <tr>
 
-                <td>{{ trx[6] }}</td>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Jenis</th>
+                        <th>Kategori</th>
+                        <th>Nominal</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
 
-                <td>
+                    </tr>
 
-                    <a href="/transactions/edit/{{ trx[0] }}"
-                       class="btn btn-warning btn-sm">
+                </thead>
 
-                        <i class="bi bi-pencil-fill"></i>
-                        Edit
+                <tbody>
 
-                    </a>
+                    {% for trx in transactions %}
 
-                    <a href="/transactions/delete/{{ trx[0] }}"
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('Yakin ingin menghapus transaksi ini?')">
+                    <tr>
 
-                        <i class="bi bi-trash-fill"></i>
-                        Hapus
+                        <td>{{ trx[0] }}</td>
 
-                    </a>
+                        <td>
+                            <strong>{{ trx[1] }}</strong>
+                        </td>
 
-                </td>
+                        <td class="text-nowrap">
+                            {{ trx[2] }}
+                        </td>
 
-            </tr>
+                        <td>
 
-            {% endfor %}
+                            {% if trx[3] == 'masuk' %}
 
-            </tbody>
+                            <span class="badge bg-success">
 
-        </table>
+                                <i class="bi bi-arrow-down-circle-fill"></i>
+                                Masuk
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-danger">
+
+                                <i class="bi bi-arrow-up-circle-fill"></i>
+                                Keluar
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ trx[4] }}
+                        </td>
+
+                        <td class="text-nowrap">
+
+                            <strong>
+                                {{ trx[5] | rupiah }}
+                            </strong>
+
+                        </td>
+
+                        <td>
+                            {{ trx[6] }}
+                        </td>
+
+                        <td class="text-nowrap">
+
+                            <div class="d-flex gap-2">
+
+                                <a
+                                    href="/transactions/edit/{{ trx[0] }}"
+                                    class="btn btn-warning btn-sm">
+
+                                    <i class="bi bi-pencil-fill"></i>
+
+                                </a>
+
+                                <a
+                                    href="/transactions/delete/{{ trx[0] }}"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin ingin menghapus transaksi ini?')">
+
+                                    <i class="bi bi-trash-fill"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
 </div>
+
+<!-- FLOATING BUTTON -->
+
+<a
+    href="/transactions/create"
+    class="btn btn-success position-fixed shadow"
+    style="
+    right:25px;
+    bottom:25px;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    font-size:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+">
+
+    <i class="bi bi-plus-lg"></i>
+
+</a>
 
 {% endblock %}

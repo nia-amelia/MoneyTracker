@@ -6,49 +6,45 @@ Dashboard
 
 {% block content %}
 
-<div class="card card-shadow saldo-card mb-4">
+<!-- STATISTIK -->
 
-    <div class="row g-4 mb-4">
+<div class="row g-4 mb-4">
 
-        <div class="col-md-3">
+    <div class="col-md-3">
 
-            <div class="card card-modern stat-card">
+        <div class="card card-modern stat-card h-100">
 
-                <div class="card-body">
+            <div class="card-body">
 
                 <h6>
                     <i class="bi bi-wallet2"></i>
-                    Total Dana</h6>
+                    Total Dana
+                </h6>
 
                 <h3 class="money-green">
                     {{ total_dana | rupiah }}
                 </h3>
 
-                </div>
-
             </div>
 
         </div>
+
     </div>
 
-    <div class="row g-4 mb-4">
+    <div class="col-md-3">
 
-        <div class="col-md-3">
+        <div class="card card-modern stat-card h-100">
 
-            <div class="card card-modern stat-card">
-
-                <div class="card-body">
+            <div class="card-body">
 
                 <h6>
-                    <i class="bi bi-arrow-up-right"></i>
+                    <i class="bi bi-arrow-down-circle-fill"></i>
                     Total Masuk
                 </h6>
 
-                <h3 class="money-green">
+                <h3 class="text-success">
                     {{ total_masuk | rupiah }}
                 </h3>
-
-                </div>
 
             </div>
 
@@ -56,41 +52,35 @@ Dashboard
 
     </div>
 
-    <div class="row g-4 mb-4">
+    <div class="col-md-3">
 
-        <div class="col-md-3">
+        <div class="card card-modern stat-card h-100">
 
-            <div class="card card-modern stat-card">
-
-                <div class="card-body">
+            <div class="card-body">
 
                 <h6>
-                    <i class="bi bi-arrow-down-left"></i>
+                    <i class="bi bi-arrow-up-circle-fill"></i>
                     Total Keluar
                 </h6>
 
-                <h3 class="money-red">
+                <h3 class="text-danger">
                     {{ total_keluar | rupiah }}
                 </h3>
-
-                </div>
 
             </div>
 
         </div>
 
-    </div>  
+    </div>
 
-    <div class="row g-4 mb-4">
+    <div class="col-md-3">
 
-        <div class="col-md-3">
+        <div class="card card-modern stat-card h-100">
 
-            <div class="card card-modern stat-card">
-
-                <div class="card-body">
+            <div class="card-body">
 
                 <h6>
-                    <i class="bi bi-exclamation-diamond-fill"></i>
+                    <i class="bi bi-receipt"></i>
                     Jumlah Transaksi
                 </h6>
 
@@ -98,87 +88,6 @@ Dashboard
                     {{ jumlah_transaksi }}
                 </h3>
 
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="row g-4 mb-4">
-
-        <div class="col-md-3">
-
-            <div class="card card-modern stat-card">
-
-                <div class="card-body">
-
-                <h6>
-                    <i class="bi bi-arrow-up-right"></i>
-                    Total Masuk
-                </h6>
-
-                <h4 class="text-success">
-
-                    {{ total_masuk | rupiah }}
-
-                </h4>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="row g-4 mb-4">
-
-        <div class="col-md-3">
-
-            <div class="card card-modern stat-card">
-
-                <div class="card-body">
-
-                <h6>
-                    <i class="bi bi-arrow-down-left"></i>
-                    Total Keluar
-                </h6>
-
-                <h4 class="text-danger">
-
-                    {{ total_keluar | rupiah }}
-
-                </h4>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="row g-4 mb-4">
-
-        <div class="col-md-3">
-
-            <div class="card card-modern stat-card">
-
-                <div class="card-body">
-
-                <h6>
-                    <i class="bi bi-exclamation-diamond-fill"></i>
-                    Jumlah Transaksi
-                </h6>
-
-                <h4>
-
-                    {{ jumlah_transaksi }}
-
-                </h4>
-
-                </div>
-
             </div>
 
         </div>
@@ -187,69 +96,77 @@ Dashboard
 
 </div>
 
-</div>
+<!-- RINGKASAN SALDO -->
 
-<div class="card card-shadow">
+<div class="card shadow border-0">
 
     <div class="card-header bg-white">
 
         <h4 class="mb-0">
+
             <i class="bi bi-wallet2"></i>
             Ringkasan Saldo
+
         </h4>
 
     </div>
-    <div class="card card-modern">
+
     <div class="card-body">
 
-        <table class="table table-borderless align-middle">
+        <div class="table-responsive">
 
-            <thead>
+            <table class="table table-hover align-middle">
 
-                <tr>
-                    <th>Nama</th>
-                    <th>Masuk</th>
-                    <th>Keluar</th>
-                    <th>Saldo</th>
-                </tr>
+                <thead class="table-light">
 
-            </thead>
+                    <tr>
 
-            <tbody>
+                        <th>Nama</th>
+                        <th>Total Masuk</th>
+                        <th>Total Keluar</th>
+                        <th>Saldo</th>
 
-            {% for row in summary %}
+                    </tr>
 
-            <tr>
+                </thead>
 
-                <td>{{ row[1] }}</td>
+                <tbody>
 
-                <td>
-                    {{ row[2] | rupiah }}
-                </td>
+                    {% for row in summary %}
 
-                <td>
-                    {{ row[3] | rupiah }}
-                </td>
+                    <tr>
 
-                <td>
+                        <td>
+                            <strong>{{ row[1] }}</strong>
+                        </td>
 
-                    <span class="badge bg-success p-2">
+                        <td class="text-success">
+                            {{ row[2] | rupiah }}
+                        </td>
 
-                        {{ row[4] | rupiah }}
+                        <td class="text-danger">
+                            {{ row[3] | rupiah }}
+                        </td>
 
-                    </span>
+                        <td>
 
-                </td>
+                            <span class="badge bg-success p-2">
 
-            </tr>
+                                {{ row[4] | rupiah }}
 
-            {% endfor %}
+                            </span>
 
-            </tbody>
+                        </td>
 
-        </table>
+                    </tr>
 
-    </div>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 

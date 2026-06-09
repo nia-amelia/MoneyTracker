@@ -1,78 +1,100 @@
 {% extends "base.html" %}
 
 {% block title %}
-Orang
+People
 {% endblock %}
 
 {% block content %}
 
-<div class="card card-shadow">
+<div class="card shadow border-0">
 
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
 
-        <h4>Daftar Orang</h4>
+        <h4 class="mb-0">
+
+            <i class="bi bi-people-fill"></i>
+            Daftar Orang
+
+        </h4>
 
         <a href="/people/create"
            class="btn btn-primary">
 
             <i class="bi bi-person-plus-fill"></i>
             Tambah Orang
+
         </a>
 
     </div>
 
     <div class="card-body">
 
-        <table class="table table-striped">
+        <div class="table-responsive">
 
-            <thead>
+            <table class="table table-hover align-middle">
 
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Aksi</th>
-                </tr>
+                <thead class="table-light">
 
-            </thead>
+                    <tr>
 
-            <tbody>
+                        <th width="10%">ID</th>
+                        <th>Nama</th>
+                        <th width="15%">Aksi</th>
 
-                {% for person in people %}
+                    </tr>
 
-                <tr>
+                </thead>
 
-                    <td>{{ person[0] }}</td>
+                <tbody>
 
-                    <td>{{ person[1] }}</td>
+                    {% for person in people %}
 
-                    <td>
+                    <tr>
 
-                        <a href="/people/edit/{{ person[0] }}"
-                           class="btn btn-warning btn-sm">
+                        <td>
+                            {{ person[0] }}
+                        </td>
 
-                           <i class="bi bi-pencil-fill"></i>
-                           Edit
+                        <td>
 
-                        </a>
+                            <strong>
+                                {{ person[1] }}
+                            </strong>
 
-                        <a href="/people/delete/{{ person[0] }}"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Yakin hapus?')">
+                        </td>
 
-                           <i class="bi bi-trash-fill"></i>
-                            Hapus
+                        <td class="text-nowrap">
 
-                        </a>
+                            <div class="d-flex gap-2">
 
-                    </td>
+                                <a href="/people/edit/{{ person[0] }}"
+                                   class="btn btn-warning btn-sm">
 
-                </tr>
+                                    <i class="bi bi-pencil-fill"></i>
 
-                {% endfor %}
+                                </a>
 
-            </tbody>
+                                <a href="/people/delete/{{ person[0] }}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Yakin ingin menghapus data ini?')">
 
-        </table>
+                                    <i class="bi bi-trash-fill"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
