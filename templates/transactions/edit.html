@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Transaksi</title>
+</head>
+<body>
+
+<h1>Edit Transaksi</h1>
+
+<form action="/transactions/update/{{ transaction[0] }}" method="POST">
+
+<label>Orang</label>
+
+<select name="person_id">
+
+{% for person in people %}
+
+<option
+value="{{ person[0] }}"
+{% if person[0] == transaction[1] %}
+selected
+{% endif %}
+>
+{{ person[1] }}
+</option>
+
+{% endfor %}
+
+</select>
+
+<br><br>
+
+<label>Tanggal</label>
+
+<input
+type="date"
+name="transaction_date"
+value="{{ transaction[2] }}"
+required>
+
+<br><br>
+
+<label>Jenis</label>
+
+<select name="type">
+
+<option value="masuk"
+{% if transaction[3] == 'masuk' %}
+selected
+{% endif %}
+>
+Masuk
+</option>
+
+<option value="keluar"
+{% if transaction[3] == 'keluar' %}
+selected
+{% endif %}
+>
+Keluar
+</option>
+
+</select>
+
+<br><br>
+
+<label>Kategori</label>
+
+<input
+type="text"
+name="category"
+value="{{ transaction[4] }}">
+
+<br><br>
+
+<label>Nominal</label>
+
+<input
+type="number"
+name="amount"
+value="{{ transaction[5] }}"
+required>
+
+<br><br>
+
+<label>Keterangan</label>
+
+<textarea name="description">{{ transaction[6] }}</textarea>
+
+<br><br>
+
+<button type="submit">
+Update
+</button>
+
+</form>
+
+</body>
+</html>
