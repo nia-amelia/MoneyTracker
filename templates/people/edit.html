@@ -1,35 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Orang</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Edit Orang</h1>
+{% block title %}
+Edit Orang
+{% endblock %}
 
-<form
-    action="/people/update/{{ person[0] }}"
-    method="POST"
->
+{% block content %}
 
-    <label>Nama</label>
+<div class="row justify-content-center">
 
-    <br><br>
+    <div class="col-lg-6">
 
-    <input
-        type="text"
-        name="name"
-        value="{{ person[1] }}"
-        required
-    >
+        <div class="card shadow border-0">
 
-    <br><br>
+            <div class="card-header bg-white">
 
-    <button type="submit">
-        Update
-    </button>
+                <h4 class="mb-0">
 
-</form>
+                    <i class="bi bi-pencil-square"></i>
+                    Edit Orang
 
-</body>
-</html>
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form
+                    action="/people/update/{{ person[0] }}"
+                    method="POST">
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Nama Orang
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            value="{{ person[1] }}"
+                            placeholder="Masukkan nama"
+                            required>
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning">
+
+                            <i class="bi bi-save-fill"></i>
+                            Update
+
+                        </button>
+
+                        <a
+                            href="/people"
+                            class="btn btn-secondary">
+
+                            <i class="bi bi-arrow-left"></i>
+                            Kembali
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,31 +1,81 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tambah Orang</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Tambah Orang</h1>
+{% block title %}
+Tambah Orang
+{% endblock %}
 
-<form action="/people/store" method="POST">
+{% block content %}
 
-    <label>Nama</label>
+<div class="row justify-content-center">
 
-    <br><br>
+    <div class="col-lg-6">
 
-    <input
-        type="text"
-        name="name"
-        required
-    >
+        <div class="card shadow border-0">
 
-    <br><br>
+            <div class="card-header bg-white">
 
-    <button type="submit">
-        Simpan
-    </button>
+                <h4 class="mb-0">
 
-</form>
+                    <i class="bi bi-person-plus-fill"></i>
+                    Tambah Orang
 
-</body>
-</html>
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form
+                    action="/people/store"
+                    method="POST">
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Nama Orang
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Masukkan nama orang"
+                            required>
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-success">
+
+                            <i class="bi bi-save-fill"></i>
+                            Simpan
+
+                        </button>
+
+                        <a
+                            href="/people"
+                            class="btn btn-secondary">
+
+                            <i class="bi bi-arrow-left"></i>
+                            Kembali
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
